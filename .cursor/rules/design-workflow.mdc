@@ -1,0 +1,14 @@
+---
+description: Design workflow guidance for UI research, Figma work, and implementation.
+alwaysApply: true
+---
+
+# Design Workflow
+
+- For UI, onboarding, pricing, dashboard, checkout, settings, or paywall work, gather real product references before inventing patterns.
+- Use Lazyweb for pricing page references, onboarding research, UI comparisons, and improvements to existing designs.
+- When a Figma file or URL is provided, inspect the design first and adapt it to the project's existing components, tokens, and layout conventions.
+- Prefer existing project components and design tokens over new one-off styles.
+- Treat screenshots and Figma output as reference material; produce production-ready code that fits the target project.
+- For larger design tasks, consider parallel subagents for reference research, Figma analysis, component mapping, and review.
+- Call out missing states, accessibility risks, responsive behavior, and test gaps before considering a design task complete.

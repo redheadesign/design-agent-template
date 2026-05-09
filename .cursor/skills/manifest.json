@@ -1,0 +1,32 @@
+{
+  "skills": [
+    {
+      "id": "lazyweb",
+      "name": "Lazyweb",
+      "path": ".cursor/skills/lazyweb/SKILL.md",
+      "category": "UI research",
+      "summary": "Find real product screenshots, pricing pages, onboarding flows, paywalls, dashboards, and UI patterns.",
+      "whenToUse": [
+        "Pricing page references",
+        "Onboarding and paywall research",
+        "Improving an existing interface",
+        "Comparing a design against real apps"
+      ],
+      "officialLinks": [
+        {
+          "label": "Lazyweb MCP install",
+          "url": "https://www.lazyweb.com/mcp-install"
+        },
+        {
+          "label": "Lazyweb MCP endpoint",
+          "url": "https://www.lazyweb.com/mcp"
+        }
+      ],
+      "visual": {
+        "cardStyle": "bento",
+        "accent": "reference-library",
+        "image": "docs/assets/skills/lazyweb-card.png"
+      }
+    }
+  ]
+}
