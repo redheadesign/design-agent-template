@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="ru" data-lang="ru" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Design Agent Skills</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #070914;
+        --bg-2: #0e1325;
+        --ink: #f8fafc;
+        --muted: #a7b0c0;
+        --line: rgba(255, 255, 255, 0.12);
+        --card: rgba(15, 23, 42, 0.72);
+        --card-strong: rgba(15, 23, 42, 0.9);
+        --brand: #8b5cf6;
+        --brand-2: #22d3ee;
+        --warm: #fb923c;
+        --shadow: rgba(0, 0, 0, 0.42);
+      }
+
+      [data-theme="light"] {
+        color-scheme: light;
+        --bg: #f8fafc;
+        --bg-2: #eef2ff;
+        --ink: #0f172a;
+        --muted: #64748b;
+        --line: rgba(15, 23, 42, 0.12);
+        --card: rgba(255, 255, 255, 0.72);
+        --card-strong: rgba(255, 255, 255, 0.9);
+        --brand: #4f46e5;
+        --brand-2: #0ea5e9;
+        --warm: #f97316;
+        --shadow: rgba(15, 23, 42, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background:
+          radial-gradient(circle at 14% 8%, color-mix(in srgb, var(--brand) 34%, transparent), transparent 30rem),
+          radial-gradient(circle at 88% 16%, color-mix(in srgb, var(--brand-2) 22%, transparent), transparent 28rem),
+          radial-gradient(circle at 72% 84%, color-mix(in srgb, var(--warm) 18%, transparent), transparent 34rem),
+          linear-gradient(135deg, var(--bg) 0%, var(--bg-2) 100%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .shell {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 34px 0 56px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        box-shadow: 0 0 28px color-mix(in srgb, var(--brand) 70%, transparent);
+      }
+
+      .switchers {
+        display: flex;
+        gap: 10px;
+      }
+
+      .toggle {
+        display: inline-flex;
+        gap: 4px;
+        padding: 5px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--card);
+        backdrop-filter: blur(18px);
+      }
+
+      button {
+        min-height: 34px;
+        padding: 0 12px;
+        border: 0;
+        border-radius: 999px;
+        color: var(--muted);
+        font: inherit;
+        font-size: 13px;
+        font-weight: 850;
+        cursor: pointer;
+        background: transparent;
+      }
+
+      button[aria-pressed="true"] {
+        color: white;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      }
+
+      [data-theme="light"] button[aria-pressed="true"] {
+        color: white;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 34px;
+        background: var(--card);
+        box-shadow: 0 24px 90px var(--shadow);
+        backdrop-filter: blur(24px);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+        gap: 20px;
+        align-items: stretch;
+      }
+
+      .hero-copy {
+        padding: 42px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 22px;
+        padding: 8px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        background: color-mix(in srgb, var(--card-strong) 72%, transparent);
+      }
+
+      h1 {
+        max-width: 760px;
+        margin: 0;
+        font-size: clamp(44px, 7vw, 88px);
+        line-height: 0.9;
+        letter-spacing: -0.075em;
+      }
+
+      .lead {
+        max-width: 650px;
+        margin: 24px 0 0;
+        color: var(--muted);
+        font-size: 19px;
+        line-height: 1.65;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 30px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 850;
+        text-decoration: none;
+        background: color-mix(in srgb, var(--card-strong) 72%, transparent);
+      }
+
+      .button.primary {
+        border: 0;
+        color: white;
+        background: linear-gradient(135deg, var(--brand), var(--brand-2));
+        box-shadow: 0 14px 38px color-mix(in srgb, var(--brand) 32%, transparent);
+      }
+
+      .hero-media {
+        position: relative;
+        overflow: hidden;
+        min-height: 520px;
+        padding: 18px;
+      }
+
+      .hero-media video {
+        width: 100%;
+        height: 100%;
+        min-height: 484px;
+        object-fit: cover;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: #020617;
+      }
+
+      .floating-note {
+        position: absolute;
+        right: 30px;
+        bottom: 30px;
+        width: min(280px, calc(100% - 60px));
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: color-mix(in srgb, var(--card-strong) 88%, transparent);
+        box-shadow: 0 18px 42px var(--shadow);
+      }
+
+      .floating-note strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+      }
+
+      .floating-note span {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .section-title {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin: 42px 0 18px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        font-size: clamp(30px, 4vw, 48px);
+        letter-spacing: -0.05em;
+      }
+
+      .section-title p {
+        max-width: 460px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .bento {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 20px;
+      }
+
+      .skill-card {
+        position: relative;
+        overflow: hidden;
+        min-height: 620px;
+        padding: 28px;
+      }
+
+      .skill-card::before {
+        position: absolute;
+        inset: -30% -18% auto auto;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        background: radial-gradient(circle, color-mix(in srgb, var(--brand) 30%, transparent), transparent 68%);
+        content: "";
+      }
+
+      .skill-top {
+        position: relative;
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .badge {
+        display: inline-flex;
+        padding: 8px 11px;
+        border-radius: 999px;
+        color: #ddd6fe;
+        font-size: 12px;
+        font-weight: 950;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: rgba(139, 92, 246, 0.18);
+      }
+
+      [data-theme="light"] .badge {
+        color: #312e81;
+        background: #e0e7ff;
+      }
+
+      .skill-card h3 {
+        margin: 22px 0 12px;
+        font-size: clamp(42px, 6vw, 76px);
+        line-height: 0.92;
+        letter-spacing: -0.07em;
+      }
+
+      .skill-summary {
+        max-width: 620px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      .preview-wrap {
+        overflow: hidden;
+        margin: 26px 0 0;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background: #020617;
+        box-shadow: 0 24px 70px var(--shadow);
+      }
+
+      .preview {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .chip {
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 750;
+        background: color-mix(in srgb, var(--card-strong) 70%, transparent);
+      }
+
+      .side-grid {
+        display: grid;
+        gap: 20px;
+      }
+
+      .mini-card,
+      .code-card {
+        padding: 24px;
+      }
+
+      .mini-card h3,
+      .code-card h3 {
+        margin: 0 0 14px;
+        font-size: 22px;
+        letter-spacing: -0.03em;
+      }
+
+      .mini-card p,
+      .code-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .link-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .link-list a {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 13px 14px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        font-weight: 850;
+        text-decoration: none;
+        background: color-mix(in srgb, var(--card-strong) 72%, transparent);
+      }
+
+      .code-card pre {
+        overflow: auto;
+        margin: 16px 0 0;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: color-mix(in srgb, var(--card-strong) 62%, transparent);
+      }
+
+      .code-card code {
+        color: color-mix(in srgb, var(--brand-2) 72%, var(--ink));
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        font-size: 12px;
+      }
+
+      .empty {
+        display: grid;
+        min-height: 220px;
+        place-items: center;
+        padding: 28px;
+        text-align: center;
+      }
+
+      .empty p {
+        max-width: 520px;
+        margin: 12px auto 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      [data-lang="en"] [data-ru],
+      [data-lang="ru"] [data-en] {
+        display: none !important;
+      }
+
+      @media (max-width: 920px) {
+        .hero,
+        .bento {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-copy,
+        .skill-card {
+          padding: 28px;
+        }
+
+        .section-title {
+          display: block;
+        }
+
+        .section-title p {
+          margin-top: 10px;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .shell {
+          width: min(100% - 24px, 1180px);
+          padding-top: 18px;
+        }
+
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .switchers {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .hero-copy,
+        .skill-card,
+        .mini-card,
+        .code-card {
+          padding: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand"><span class="dot"></span><span data-ru>Каталог skills</span><span data-en>Skills catalog</span></div>
+        <div class="switchers" aria-label="Display settings">
+          <div class="toggle" aria-label="Language">
+            <button type="button" data-set-lang="ru" aria-pressed="true">RU</button>
+            <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+          </div>
+          <div class="toggle" aria-label="Theme">
+            <button type="button" data-set-theme="dark" aria-pressed="true" data-ru>Темная</button>
+            <button type="button" data-set-theme="dark" aria-pressed="true" data-en>Dark</button>
+            <button type="button" data-set-theme="light" aria-pressed="false" data-ru>Светлая</button>
+            <button type="button" data-set-theme="light" aria-pressed="false" data-en>Light</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="panel hero-copy">
+          <div class="eyebrow"><span class="dot"></span><span data-ru>Design Agent Template</span><span data-en>Design Agent Template</span></div>
+          <h1 data-ru>Понятный каталог всех навыков агента.</h1>
+          <h1 data-en>A visual catalog for every workflow your agent knows.</h1>
+          <p class="lead" data-ru>
+            Вместо набора скрытых `SKILL.md` здесь есть карточки: что делает skill, когда его звать, где лежит исходник и какие официальные ссылки нужны для старта.
+          </p>
+          <p class="lead" data-en>
+            Instead of hidden `SKILL.md` files, this page gives every skill a card: what it does, when to use it, where it lives, and which official links matter.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="../../.cursor/skills/manifest.json" data-ru>Открыть manifest</a>
+            <a class="button primary" href="../../.cursor/skills/manifest.json" data-en>Open manifest</a>
+            <a class="button" href="../SKILLS_CATALOG.md" data-ru>Документация</a>
+            <a class="button" href="../SKILLS_CATALOG.md" data-en>Read docs</a>
+          </div>
+        </div>
+        <aside class="panel hero-media" aria-label="Lazyweb preview">
+          <video src="../assets/skills/lazyweb-card.mp4" autoplay muted loop playsinline controls></video>
+          <div class="floating-note">
+            <strong data-ru>Официальный preview</strong>
+            <strong data-en>Official preview</strong>
+            <span data-ru>Живой ролик лучше показывает, зачем нужен skill, чем статичная заглушка.</span>
+            <span data-en>A real video explains the skill better than a static placeholder.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section-title">
+        <h2 data-ru>Установленные skills</h2>
+        <h2 data-en>Installed skills</h2>
+        <p data-ru>
+          Первый skill идет вместе с шаблоном. Добавляй новые записи в manifest, и каталог будет расти в галерею для Figma, аудитов, screenshot review и дизайн-систем.
+        </p>
+        <p data-en>
+          The first skill ships with the template. Add manifest entries and the catalog grows into a gallery for Figma, audits, screenshot review, and design systems.
+        </p>
+      </section>
+
+      <section class="bento" id="skills" aria-live="polite"></section>
+    </main>
+
+    <script>
+      const copy = {
+        ru: {
+          lazywebSummary:
+            "Находит реальные скриншоты продуктов: pricing pages, onboarding, paywalls, dashboards и UI-паттерны для дизайн-референсов.",
+          useCases: [
+            "Референсы pricing page",
+            "Онбординг и paywall research",
+            "Улучшение текущего интерфейса",
+            "Сравнение дизайна с реальными приложениями",
+          ],
+          resources: "Официальные ресурсы",
+          resourcesBody: "Переход от понятной карточки к оригинальной установке и документации.",
+          localFiles: "Локальные файлы",
+          localFilesBody: "Каждая карточка ведет к исходнику skill, чтобы поведение агента оставалось прозрачным.",
+          next: "Дальше",
+          nextBody: "Добавь Figma, screenshot review, design-system audit и launch-page skills отдельными карточками.",
+        },
+        en: {
+          lazywebSummary:
+            "Find real product screenshots: pricing pages, onboarding, paywalls, dashboards, and UI patterns for design references.",
+          useCases: [
+            "Pricing page references",
+            "Onboarding and paywall research",
+            "Improving an existing interface",
+            "Comparing a design against real apps",
+          ],
+          resources: "Official resources",
+          resourcesBody: "Jump from a beginner-friendly card to the original setup and product docs.",
+          localFiles: "Local files",
+          localFilesBody: "Each card points back to the skill source so the agent behavior stays inspectable.",
+          next: "Next",
+          nextBody: "Add Figma, screenshot review, design-system audit, and launch-page skills as separate cards.",
+        },
+      };
+
+      const fallbackManifest = {
+        skills: [
+          {
+            id: "lazyweb",
+            name: "Lazyweb",
+            path: ".cursor/skills/lazyweb/SKILL.md",
+            category: "UI research",
+            summary: copy.en.lazywebSummary,
+            whenToUse: copy.en.useCases,
+            officialLinks: [
+              { label: "Lazyweb MCP install", url: "https://www.lazyweb.com/mcp-install" },
+              { label: "Lazyweb MCP endpoint", url: "https://www.lazyweb.com/mcp" },
+            ],
+            visual: {
+              mediaType: "video",
+              image: "../assets/skills/lazyweb-card.mp4",
+            },
+          },
+        ],
+      };
+
+      let manifestCache = fallbackManifest;
+
+      async function loadManifest() {
+        try {
+          const response = await fetch("../../.cursor/skills/manifest.json", { cache: "no-store" });
+          if (!response.ok) throw new Error("Manifest unavailable");
+          const manifest = await response.json();
+          return normalizeMediaPaths(manifest);
+        } catch {
+          return fallbackManifest;
+        }
+      }
+
+      function normalizeMediaPaths(manifest) {
+        return {
+          ...manifest,
+          skills: manifest.skills.map((skill) => ({
+            ...skill,
+            visual: {
+              ...skill.visual,
+              image: skill.visual?.image?.replace("docs/assets", "../assets"),
+            },
+          })),
+        };
+      }
+
+      function localizedSkill(skill, lang) {
+        if (skill.id !== "lazyweb") return skill;
+        return {
+          ...skill,
+          summary: copy[lang].lazywebSummary,
+          whenToUse: copy[lang].useCases,
+        };
+      }
+
+      function renderMedia(skill) {
+        const src = skill.visual?.image;
+        if (skill.visual?.mediaType === "video" || src?.endsWith(".mp4")) {
+          return `<video class="preview" src="${src}" autoplay muted loop playsinline controls></video>`;
+        }
+        return `<img class="preview" src="${src}" alt="${skill.name} skill preview" />`;
+      }
+
+      function renderSkill(skill) {
+        const lang = document.documentElement.dataset.lang;
+        const text = copy[lang];
+        const item = localizedSkill(skill, lang);
+        const uses = item.whenToUse.map((useCase) => `<span class="chip">${useCase}</span>`).join("");
+        const links = item.officialLinks
+          .map((link) => `<a href="${link.url}" target="_blank" rel="noreferrer">${link.label}<span>↗</span></a>`)
+          .join("");
+
+        return `
+          <article class="panel skill-card">
+            <div class="skill-top">
+              <span class="badge">${item.category}</span>
+              <span class="badge">${item.id}</span>
+            </div>
+            <h3>${item.name}</h3>
+            <p class="skill-summary">${item.summary}</p>
+            <div class="preview-wrap">${renderMedia(item)}</div>
+            <div class="chips">${uses}</div>
+          </article>
+          <div class="side-grid">
+            <article class="panel mini-card">
+              <h3>${text.resources}</h3>
+              <p>${text.resourcesBody}</p>
+              <div class="link-list">${links}</div>
+            </article>
+            <article class="panel code-card">
+              <h3>${text.localFiles}</h3>
+              <p>${text.localFilesBody}</p>
+              <pre><code>${item.path}
+.cursor/skills/manifest.json</code></pre>
+            </article>
+            <article class="panel empty">
+              <div>
+                <span class="badge">${text.next}</span>
+                <p>${text.nextBody}</p>
+              </div>
+            </article>
+          </div>
+        `;
+      }
+
+      function render() {
+        const root = document.querySelector("#skills");
+        root.innerHTML = manifestCache.skills.map(renderSkill).join("");
+      }
+
+      function setLang(lang) {
+        document.documentElement.dataset.lang = lang;
+        document.documentElement.lang = lang;
+        document.querySelectorAll("[data-set-lang]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.setLang === lang));
+        });
+        render();
+      }
+
+      function setTheme(theme) {
+        document.documentElement.dataset.theme = theme;
+        document.querySelectorAll("[data-set-theme]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.setTheme === theme));
+        });
+      }
+
+      document.querySelectorAll("[data-set-lang]").forEach((button) => {
+        button.addEventListener("click", () => setLang(button.dataset.setLang));
+      });
+
+      document.querySelectorAll("[data-set-theme]").forEach((button) => {
+        button.addEventListener("click", () => setTheme(button.dataset.setTheme));
+      });
+
+      loadManifest().then((manifest) => {
+        manifestCache = manifest;
+        render();
+      });
+    </script>
+  </body>
+</html>

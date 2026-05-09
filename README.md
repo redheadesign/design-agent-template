@@ -1,52 +1,59 @@
 # Design Agent Template
 
-Cursor workspace template for design-heavy projects: UI research, Figma implementation, Lazyweb references, design reviews, and reusable agent guidance.
+Русский | [English](README.en.md)
 
-## Quick Start
+Текущая версия: `v0.2.0`
 
-1. Clone or download this folder for a new design project.
-2. Get a free Lazyweb MCP token at https://www.lazyweb.com/mcp-install.
-3. Copy `.cursor/mcp.example.json` to `.cursor/mcp.json`.
-4. Put your local Lazyweb bearer token into `.cursor/mcp.json`.
-5. Reload Cursor so MCP servers and local slash skills are discovered.
-6. Start design work with the local rules and skills in `.cursor/`.
+Стартовый Cursor workspace для дизайн-задач: UI research, Figma implementation, Lazyweb references, design review и переиспользуемые правила для агента.
 
-## What Is Included
+## Быстрый старт
 
-- `.cursor/skills/lazyweb/SKILL.md`: local `/lazyweb` skill for UI references, screenshots, onboarding patterns, pricing pages, and design comparisons.
-- `.cursor/rules/design-workflow.mdc`: persistent agent guidance for design tasks.
-- `.cursor/rules/security-and-secrets.mdc`: persistent guidance for keeping local tokens out of Git.
-- `.cursor/mcp.example.json`: safe MCP template for Lazyweb setup.
-- `.cursor/skills/manifest.json`: beginner-friendly metadata for a future visual skills catalog.
-- `docs/`: workflow notes for subagents, GitHub, skills catalog, and adding more skills or rules.
+1. Склонируй или скачай эту папку для нового дизайн-проекта.
+2. Получи бесплатный Lazyweb MCP token на https://www.lazyweb.com/mcp-install.
+3. Скопируй `.cursor/mcp.example.json` в `.cursor/mcp.json`.
+4. Вставь локальный Lazyweb bearer token в `.cursor/mcp.json`.
+5. Перезагрузи Cursor, чтобы MCP servers и локальные slash skills появились в агенте.
+6. Начинай работу с правилами и skills из `.cursor/`.
 
-## Local Files Vs Public Template
+## Что внутри
 
-`.cursor/mcp.json` is intentionally ignored because it can contain local bearer tokens. Keep real credentials there only on your machine. Commit `.cursor/mcp.example.json` instead.
+- `.cursor/skills/lazyweb/SKILL.md`: локальный `/lazyweb` skill для UI references, screenshots, onboarding patterns, pricing pages и design comparisons.
+- `.cursor/skills/manifest.json`: понятное описание skills для визуального каталога.
+- `docs/skills/index.html`: bento-каталог skills с темной темой по умолчанию, RU/EN переключателем и preview-видео.
+- `.cursor/rules/design-workflow.mdc`: постоянные правила для дизайн-задач.
+- `.cursor/rules/security-and-secrets.mdc`: правила, чтобы токены и локальные конфиги не попали в Git.
+- `.cursor/mcp.example.json`: безопасный пример Lazyweb MCP setup.
+- `docs/`: инструкции по subagents, GitHub, каталогу skills и добавлению новых правил.
 
-## Lazyweb Token
+## Визуальный каталог skills
 
-Lazyweb provides a free no-billing MCP token through the one-click installer:
+Открой `docs/skills/index.html`, чтобы увидеть skills как bento-карточки. Каталог стартует на русском и в темной теме, умеет переключаться на английский и использует официальное Lazyweb preview-видео.
+
+## Локальные файлы и публичный шаблон
+
+`.cursor/mcp.json` специально игнорируется, потому что там могут быть локальные bearer tokens. Храни настоящие credentials только у себя на машине. В репозиторий коммить только `.cursor/mcp.example.json`.
+
+## Lazyweb token
+
+Lazyweb выдает бесплатный no-billing MCP token через one-click installer:
 
 ```text
 https://www.lazyweb.com/mcp-install
 ```
 
-An agent can open that setup page during project bootstrap, copy the generated bearer token into ignored local config, and then verify `lazyweb_health` and `lazyweb_search`.
+Агент может открыть эту страницу при старте проекта, вставить token в ignored local config и проверить `lazyweb_health` плюс `lazyweb_search`.
 
-## Recommended Use
+## README на двух языках
 
-Use this folder as the first layer of a design agent workspace. Add project-specific docs, Figma notes, screenshots, and rules as a project grows. Keep reusable guidance in `.cursor/rules/` and reusable slash workflows in `.cursor/skills/`.
+GitHub и GitLab не дают надежного автоматического переключателя языка README. Практичный вариант для RU-аудитории: держать `README.md` на русском, рядом вести `README.en.md` и давать языковые ссылки сверху.
 
-For design research, ask the agent to use Lazyweb when you need pricing page references, onboarding examples, paywalls, dashboards, settings screens, app flows, or comparisons against real products.
+## Безопасность перед публикацией
 
-## GitHub Safety
-
-Before publishing, always check:
+Перед push проверяй:
 
 ```bash
 git status --ignored
 git diff -- . ":(exclude).cursor/mcp.json"
 ```
 
-Do not commit `.cursor/mcp.json`, `.env`, tokens, private screenshots, customer data, or private Figma exports.
+Не коммить `.cursor/mcp.json`, `.env`, токены, приватные screenshots, customer data и приватные Figma exports.

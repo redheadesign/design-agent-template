@@ -2,6 +2,8 @@
 
 Each skill should be easy to understand before someone opens the raw `SKILL.md`.
 
+Open the visual catalog at `docs/skills/index.html`.
+
 ## Source Of Truth
 
 Use `.cursor/skills/manifest.json` as the public catalog index. Each entry should describe:
@@ -12,9 +14,9 @@ Use `.cursor/skills/manifest.json` as the public catalog index. Each entry shoul
 - Which official resources explain the underlying tool.
 - Which image or preview should be used in a visual catalog.
 
-## Bento Card Idea
+## Bento Card UI
 
-A future UI can render each skill as a bento card from the manifest:
+The catalog renders each skill as a bento card from the manifest:
 
 - Title and category.
 - Short outcome-focused summary.
@@ -22,7 +24,7 @@ A future UI can render each skill as a bento card from the manifest:
 - Official links.
 - Preview image or product screenshot.
 
-This can become a small SwiftUI-style gallery, web page, or Cursor Canvas. The important part is that the content stays in `manifest.json`, so adding a new skill automatically gives the catalog enough metadata to render a card.
+The important part is that the content stays in `manifest.json`, so adding a new skill automatically gives the catalog enough metadata to render a card.
 
 ## Adding A New Skill Card
 

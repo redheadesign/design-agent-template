@@ -25,7 +25,8 @@
       "visual": {
         "cardStyle": "bento",
         "accent": "reference-library",
-        "image": "docs/assets/skills/lazyweb-card.png"
+        "mediaType": "video",
+        "image": "docs/assets/skills/lazyweb-card.mp4"
       }
     }
   ]

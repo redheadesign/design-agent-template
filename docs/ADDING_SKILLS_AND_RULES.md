@@ -21,6 +21,8 @@ Keep each skill focused:
 
 Then add a public-facing entry to `.cursor/skills/manifest.json`. This keeps the repository understandable for people who want a visual catalog instead of reading every `SKILL.md`.
 
+The visual catalog lives at `docs/skills/index.html`. If the skill has a preview, place a video, SVG, or image in `docs/assets/skills/` and reference it from the manifest.
+
 ## Rules
 
 Put project rules here:
